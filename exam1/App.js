@@ -1,21 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
+import Calculator from './components/Calculator';
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={styles.borderedContainer}>
+      <SafeAreaView style={styles.container}>
+        <Calculator />
+      </SafeAreaView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
+  borderedContainer: {
+    flex: 1,
+    borderWidth: 5,
+    borderColor: 'blue',
+    margin: 20,
+    borderRadius: 20,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 16,
   },
 });
+
+export default App;

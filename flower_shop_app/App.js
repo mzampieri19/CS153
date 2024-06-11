@@ -1,21 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Gallery from './components/Gallery'; 
+import HomePage from './components/HomePage';
+import Occasions from './components/Occasions';
+import Pricing from './components/Pricing';
+import Careers from './components/Careers';
+import Story from './components/Story';
+import Other from './components/Other';
+import About from './components/About';
+import Survey from './components/Survey';
 
-export default function App() {
+
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomePage} />
+        <Stack.Screen name="Gallery" component={Gallery} />
+        <Stack.Screen name="Occasions" component={Occasions} />
+        <Stack.Screen name="Pricing" component={Pricing} />
+        <Stack.Screen name="Careers" component={Careers} />
+        <Stack.Screen name="Story" component={Story} />
+        <Stack.Screen name="Other" component={Other} />
+        <Stack.Screen name="About" component={About} />
+        <Stack.Screen name="Survey" component={Survey} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
+
+export default App;
