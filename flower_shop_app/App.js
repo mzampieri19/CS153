@@ -11,6 +11,7 @@ import Pricing from './components/Pricing';
 import Story from './components/Story';
 import About from './components/About';
 import Careers from './components/Careers';
+import Survey from './components/Survey';
 
 
 const Stack = createStackNavigator();
@@ -28,6 +29,7 @@ const App = () => {
           <Stack.Screen name="Careers" component={Careers} />
           <Stack.Screen name="Story" component={Story} />
           <Stack.Screen name="About" component={About} />
+          <Stack.Screen name="Survey" component={Survey} />
         </Stack.Navigator>
       </NavigationContainer>
     </ValueProvider>
