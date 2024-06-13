@@ -33,8 +33,6 @@ const App = () => {
         </Stack.Navigator>
       </NavigationContainer>
     </ValueProvider>
-
-   
   );
 };
 
