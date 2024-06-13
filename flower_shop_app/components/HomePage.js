@@ -1,7 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, TextInput } from 'react-native';
+import { useValue } from './ValueContext';
 
-const HomePage = ({ navigation }) => {
+function HomePage ({ navigation }) {
+  const { currentValue, setCurrentValue } = useValue();
+
   return (
     <ScrollView style={styles.container}>
       <View>
@@ -13,6 +16,23 @@ const HomePage = ({ navigation }) => {
         <Text style={styles.text}>Hours: ______</Text>
         <Text style={styles.subtitle}>Disclaimer:</Text>
         <Text style={styles.text}>Please place orders at minimum 1 week before desired delivery</Text>
+        <Text style={styles.subtitle}>Log in to see your past orders </Text>
+        
+        <Text style={styles.text}>Username</Text>
+        <TextInput 
+                style={styles.input}
+                onChangeText={(text) => {
+                    setCurrentValue({...currentValue, username: text});
+                }}
+            />
+        <Text style={styles.text}>Password</Text>
+        <TextInput 
+                style={styles.input}
+                onChangeText={(text) => {
+                    setCurrentValue({...currentValue, password: text});
+                }}
+            />
+            <Text style={styles.text}>Password: {currentValue['password']}</Text>
       </View>
 
       <View style={styles.buttonsContainer}>

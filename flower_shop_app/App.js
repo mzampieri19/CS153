@@ -11,25 +11,28 @@ import Story from './components/Story';
 import Other from './components/Other';
 import About from './components/About';
 import Survey from './components/Survey';
+import { ValueProvider } from './components/ValueContext';
 
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomePage} />
-        <Stack.Screen name="Gallery" component={Gallery} />
-        <Stack.Screen name="Occasions" component={Occasions} />
-        <Stack.Screen name="Pricing" component={Pricing} />
-        <Stack.Screen name="Careers" component={Careers} />
-        <Stack.Screen name="Story" component={Story} />
-        <Stack.Screen name="Other" component={Other} />
-        <Stack.Screen name="About" component={About} />
-        <Stack.Screen name="Survey" component={Survey} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ValueProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={HomePage} />
+          <Stack.Screen name="Gallery" component={Gallery} />
+          <Stack.Screen name="Occasions" component={Occasions} />
+          <Stack.Screen name="Pricing" component={Pricing} />
+          <Stack.Screen name="Careers" component={Careers} />
+          <Stack.Screen name="Story" component={Story} />
+          <Stack.Screen name="Other" component={Other} />
+          <Stack.Screen name="About" component={About} />
+          <Stack.Screen name="Survey" component={Survey} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ValueProvider>
   );
 };
 
