@@ -21,8 +21,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5fcff',
   },
   username: {
-    fontSize: 16,
+    fontSize: 24,
     color: '#333',
+    justifyContent: 'center',
   },
 });
 

@@ -1,9 +1,12 @@
-import React, { useState, useContext, createContext } from "react";
+import React, { createContext, useContext, useState } from 'react';
 
 const ValueContext = createContext();
 
 export const ValueProvider = ({ children }) => {
-  const [currentValue, setCurrentValue] = useState({ username: '', password: '' });
+  const [currentValue, setCurrentValue] = useState({
+    username: '',
+    password: '',
+  });
 
   return (
     <ValueContext.Provider value={{ currentValue, setCurrentValue }}>
