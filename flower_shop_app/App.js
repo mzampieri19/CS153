@@ -6,6 +6,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Gallery from './components/Gallery';
 import { ValueProvider } from './components/ValueContext';
 import Services from './components/Services';
+import Occasions from './components/Occasions';
+import Pricing from './components/Pricing';
+import Story from './components/Story';
+import About from './components/About';
+import Careers from './components/Careers';
+
 
 const Stack = createStackNavigator();
 
@@ -17,6 +23,11 @@ const App = () => {
           <Stack.Screen name="Home" component={HomePage} />
           <Stack.Screen name = "Services" component = {Services} />
           <Stack.Screen name="Gallery" component={Gallery} />
+          <Stack.Screen name="Occasions" component={Occasions} />
+          <Stack.Screen name="Pricing" component={Pricing} />
+          <Stack.Screen name="Careers" component={Careers} />
+          <Stack.Screen name="Story" component={Story} />
+          <Stack.Screen name="About" component={About} />
         </Stack.Navigator>
       </NavigationContainer>
     </ValueProvider>

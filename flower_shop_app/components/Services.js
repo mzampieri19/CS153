@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { useValue } from './ValueContext'; 
 
-const LogInPage = () => {
+const LogInPage = ({navigation}) => {
   const { currentValue } = useValue();
 
   return (
@@ -12,41 +12,69 @@ const LogInPage = () => {
       </View>
 
       <View style={styles.buttonsContainer}>
-        <ButtonWithDescription
-          title="Gallery"
-          description="Browse a curated selection of handmade bouquets!"
-        />
-        <ButtonWithDescription
-          title="Occasions"
-          description="Fill out a short survey about your occasion and we'll get back to you for more details."
-        />
-        <ButtonWithDescription
-          title="Pricing"
-          description="See our pricing options for flower arrangements."
-        />
-        <ButtonWithDescription
-          title="Careers"
-          description="Join our team!"
-        />
-        <ButtonWithDescription
-          title="Story"
-          description="Read about my journey and passion for flowers."
-        />
-        <ButtonWithDescription
-          title="Account"
-          description="View your account details."
-        />
+        <Pressable
+          style={styles.button}
+          onPress={() => navigation.navigate('Gallery')}
+        >
+        <Text style={styles.buttonText}>Gallery</Text>
+        </Pressable>
       </View>
-    </View>
-  );
-};
 
-const ButtonWithDescription = ({ title, description }) => {
-  return (
-    <Pressable style={styles.button}>
-      <Text style={styles.buttonText}>{title}</Text>
-      <Text style={styles.buttonDescription}>{description}</Text>
-    </Pressable>
+      <View style={styles.buttonsContainer}>
+        <Pressable
+          style={styles.button}
+          onPress={() => navigation.navigate('Occasions')}
+        >
+        <Text style={styles.buttonText}>Occasions</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.buttonsContainer}>
+        <Pressable
+          style={styles.button}
+          onPress={() => navigation.navigate('Pricing')}
+        >
+        <Text style={styles.buttonText}>Pricing</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.buttonsContainer}>
+        <Pressable
+          style={styles.button}
+          onPress={() => navigation.navigate('Careers')}
+        >
+        <Text style={styles.buttonText}>Careers</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.buttonsContainer}>
+        <Pressable
+          style={styles.button}
+          onPress={() => navigation.navigate('Story')}
+        >
+        <Text style={styles.buttonText}>Story</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.buttonsContainer}>
+        <Pressable
+          style={styles.button}
+          onPress={() => navigation.navigate('Account')}
+        >
+        <Text style={styles.buttonText}>Account</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.buttonsContainer}>
+        <Pressable
+          style={styles.button}
+          onPress={() => navigation.navigate('About')}
+        >
+        <Text style={styles.buttonText}>About</Text>
+        </Pressable>
+      </View>
+
+    </View>
   );
 };
 
