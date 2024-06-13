@@ -1,38 +1,49 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable, TextInput } from 'react-native';
 import { useValue } from './ValueContext';
+import EmptyBox from './EmptyBox';
 
-function HomePage ({ navigation }) {
+function HomePage({ navigation }) {
   const { currentValue, setCurrentValue } = useValue();
 
   return (
-    <ScrollView style={styles.container}>
+    
+    <ScrollView contentContainerStyle={styles.contentContainer}>
       <View>
         <Text style={styles.title}>Welcome to Leilyz's Flower Shop</Text>
+        <EmptyBox height={65} />
+        
         <Text style={styles.subtitle}>Information:</Text>
         <Text style={styles.text}>Contact: ______</Text>
         <Text style={styles.text}>Email: ______</Text>
         <Text style={styles.text}>Instagram: ______</Text>
         <Text style={styles.text}>Hours: ______</Text>
+        
+        <EmptyBox height={65} />
+        
         <Text style={styles.subtitle}>Disclaimer:</Text>
         <Text style={styles.text}>Please place orders at minimum 1 week before desired delivery</Text>
-        <Text style={styles.subtitle}>Log in to see your past orders </Text>
+        
+        <EmptyBox height={65} />
+        
+        <Text style={styles.subtitle}>Log in to see your past orders</Text>
         
         <Text style={styles.text}>Username</Text>
         <TextInput 
-                style={styles.input}
-                onChangeText={(text) => {
-                    setCurrentValue({...currentValue, username: text});
-                }}
-            />
+          style={styles.input}
+          onChangeText={(text) => {
+            setCurrentValue({ ...currentValue, username: text });
+          }}
+        />
+        
         <Text style={styles.text}>Password</Text>
         <TextInput 
-                style={styles.input}
-                onChangeText={(text) => {
-                    setCurrentValue({...currentValue, password: text});
-                }}
-            />
-            <Text style={styles.text}>Password: {currentValue['password']}</Text>
+          style={styles.input}
+          secureTextEntry
+          onChangeText={(text) => {
+            setCurrentValue({ ...currentValue, password: text });
+          }}
+        />
       </View>
 
       <View style={styles.buttonsContainer}>
@@ -84,23 +95,25 @@ function HomePage ({ navigation }) {
         >
           <Text style={styles.buttonText}>About</Text>
         </Pressable>
+      <EmptyBox height={20} />
       </View>
     </ScrollView>
+
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  contentContainer: {
+    flexGrow: 1,
     backgroundColor: '#F5FCFF',
     padding: 20,
+    justifyContent: 'center',
   },
   title: {
     fontSize: 48,
     textAlign: 'center',
     marginVertical: 10,
     fontWeight: 'bold',
-
   },
   subtitle: {
     fontSize: 24,
@@ -128,6 +141,13 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 16,
     textAlign: 'center',
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginVertical: 5,
+    paddingHorizontal: 5,
   },
 });
 
