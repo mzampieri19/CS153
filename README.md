@@ -14,7 +14,7 @@
 
 - Flower_shop_app: File for the flower_shop_app that is the main project for the class. 
 
-### Edit History 
+### Flower Shop App Edit History 
 
 1. 6-11-24
 - As of right now, it features a home page with navigation to other pages, and an occation page that lets peeople choose the given occasion and propmts them to fill out a survery form. Will continue to work on this project throughout the course. 
