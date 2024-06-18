@@ -10,7 +10,6 @@ const Survey = ({ route }) => {
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = () => {
-    // Here you can handle form submission
     setSubmitted(true);
   };
 

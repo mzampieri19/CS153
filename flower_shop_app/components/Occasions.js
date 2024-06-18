@@ -9,6 +9,8 @@ const Occasions = ({ navigation }) => {
     'Graduation',
     'Get Well Soon',
     'Thank You',
+    "Funeral",
+    'Other',
   ];
 
   return (

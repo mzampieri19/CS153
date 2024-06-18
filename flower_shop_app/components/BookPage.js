@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity, Modal, Dimensions } from 'react-native';
-import { imageMap } from './ImageMap'; // Adjust the import path as necessary
-import { DescriptionMap } from './DescriptionMap'; // Adjust the import path as necessary
+import { imageMap } from './ImageMap'; 
+import { DescriptionMap } from './DescriptionMap'; 
+import { OccasionMap } from './OccasionMap'; 
 
 const { width, height } = Dimensions.get('window');
 
@@ -24,13 +25,16 @@ const BookPage = ({ index, zoomLevel }) => {
         </View>
       </TouchableOpacity>
 
-
+        <Text style={styles.Occasion}> {OccasionMap[index * 2 -1]}</Text>
+        
       <TouchableOpacity onPress={() => handleImagePress(imageMap[index * 2])}>
       <View style={styles.imageContainer}>
         <Image style={[styles.pageImage, { transform: [{ scale: zoomLevel }] }]} source={imageMap[index * 2]} />
         <Text style={styles.imageText}>{DescriptionMap[index * 2]}</Text>
       </View>
       </TouchableOpacity>
+
+      <Text style={styles.Occasion}> {OccasionMap[index * 2]}</Text>
       
       <Modal visible={modalVisible} transparent={true}>
         <View style={styles.modalContainer}>
@@ -52,6 +56,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  Occasion: {
     fontSize: 16,
     marginBottom: 10,
   },
