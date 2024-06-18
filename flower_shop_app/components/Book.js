@@ -18,6 +18,8 @@ const Book = () => {
     [9, 10],
   ];
 
+  const zoomLevels = [1, 1, 1, 1, 1];
+
   const handleScroll = (event) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
     const index = Math.floor(contentOffsetX / BOOK_WIDTH);
@@ -38,12 +40,7 @@ const Book = () => {
         >
           {pages.map((pagePair, index) => (
             <View key={index} style={styles.pageContainer}>
-              <View style={styles.page}>
-                <BookPage index={pagePair[0]} />
-              </View>
-              <View style={styles.page}>
-                <BookPage index={pagePair[1]} />
-              </View>
+              <BookPage index={pagePair[0]} zoomLevel={zoomLevels[index]} />
             </View>
           ))}
         </ScrollView>
@@ -57,12 +54,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
   },
   book: {
     width: BOOK_WIDTH,
     height: BOOK_HEIGHT,
-    borderColor: 'black',
     borderWidth: 1,
     overflow: 'hidden',
   },
@@ -81,7 +76,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRightWidth: 1,
-    borderColor: 'black',
   },
 });
 
