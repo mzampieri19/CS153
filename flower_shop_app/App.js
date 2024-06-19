@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime';
 import * as React from 'react';
 import { SafeAreaView, StyleSheet, View} from 'react-native';
 import HomePage from './components/HomePage';
@@ -13,10 +14,9 @@ import About from './components/About';
 import Careers from './components/Careers';
 import Survey from './components/Survey';
 
-
 const Stack = createStackNavigator();
 
-const App = () => {
+const MainApp = () => {
   return (
     <ValueProvider>
       <NavigationContainer>
@@ -42,5 +42,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default MainApp;
 

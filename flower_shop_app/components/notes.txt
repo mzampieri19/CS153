@@ -1,0 +1,65 @@
+  return (
+    <View style={styles.container}>
+      {loggedIn ? (
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+          <Text style={styles.title}>Welcome to Leilyz's Flower Shop</Text>
+          <Text style={styles.subtitle}>Information:</Text>
+          <Text style={styles.text}>Contact: ______</Text>
+          <Text style={styles.text}>Email: ______</Text>
+          <Text style={styles.text}>Instagram: ______</Text>
+          <Text style={styles.text}>Hours: ______</Text>
+
+          <Text style={styles.subtitle}>Disclaimer:</Text>
+          <Text style={styles.text}>Please place orders at minimum 1 week before desired delivery</Text>
+
+          <EmptyBox height={20} />
+
+          <Text style={styles.subtitle}>Log in to see your past orders</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            value={username}
+            onChangeText={setUsername}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+          <Button title="Login" onPress={handleLogin} />
+        </ScrollView>
+      ) : (
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+          <Text style={styles.title}>Welcome to Leilyz's Flower Shop</Text>
+          <Text style={styles.subtitle}>Information:</Text>
+          <Text style={styles.text}>Contact: ______</Text>
+          <Text style={styles.text}>Email: ______</Text>
+          <Text style={styles.text}>Instagram: ______</Text>
+          <Text style={styles.text}>Hours: ______</Text>
+
+          <Text style={styles.subtitle}>Disclaimer:</Text>
+          <Text style={styles.text}>Please place orders at minimum 1 week before desired delivery</Text>
+
+          <EmptyBox height={20} />
+
+          <Text style={styles.subtitle}>Log in to see your past orders</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            value={username}
+            onChangeText={setUsername}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+          <Button title="Login" onPress={handleLogin} />
+        </ScrollView>
+      )}
+    </View>
+  );

@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useValue } from './ValueContext';
+import { fetchData } from './Storage';
 
 const Header = () => {
-  const { currentValue } = useValue();
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    const loadUsername = async () => {
+      try {
+        const storedUsername = await fetchData('username');
+        if (storedUsername) {
+          setUsername(storedUsername);
+        }
+      } catch (error) {
+        console.error('Failed to load username:', error);
+      }
+    };
+
+    loadUsername();
+  }, []);
 
   return (
     <View style={styles.headerContainer}>
-      <Text style={styles.username}>Logged in as: {currentValue.username}</Text>
+      <Text style={styles.username}>Logged in as: {username}</Text>
     </View>
   );
 };

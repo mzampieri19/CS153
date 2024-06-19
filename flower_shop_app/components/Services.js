@@ -1,14 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { useValue } from './ValueContext'; 
+import Header from './Header';
 
 const LogInPage = ({navigation}) => {
-  const { currentValue } = useValue();
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.username}>Welcome, {currentValue.username}</Text>
+        <Header />
       </View>
 
       <View style={styles.buttonsContainer}>
