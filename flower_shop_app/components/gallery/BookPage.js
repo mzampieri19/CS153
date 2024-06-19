@@ -6,7 +6,7 @@ import { OccasionMap } from './OccasionMap';
 
 const { width, height } = Dimensions.get('window');
 
-const BookPage = ({ index, zoomLevel }) => {
+const BookPage = ({ pages, index, zoomLevel }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -15,26 +15,29 @@ const BookPage = ({ index, zoomLevel }) => {
     setModalVisible(true);
   };
 
+  const leftImageIndex = pages[index][0] - 1; // Adjust for zero-based index
+  const rightImageIndex = pages[index][1] - 1; // Adjust for zero-based index
+
   return (
     <View style={styles.container}>
 
-      <TouchableOpacity onPress={() => handleImagePress(imageMap[index * 2 - 1])}>
+      <TouchableOpacity onPress={() => handleImagePress(imageMap[leftImageIndex])}>
         <View style={styles.imageContainer}>
-          <Image style={[styles.pageImage, { transform: [{ scale: zoomLevel }] }]} source={imageMap[index * 2 - 1]} />
-          <Text style={styles.imageText}>{DescriptionMap[index * 2 -1]}</Text>
+          <Image style={[styles.pageImage, { transform: [{ scale: zoomLevel }] }]} source={imageMap[leftImageIndex]} />
+          <Text style={styles.imageText}>{DescriptionMap[leftImageIndex]}</Text>
         </View>
       </TouchableOpacity>
 
-        <Text style={styles.Occasion}> {OccasionMap[index * 2 -1]}</Text>
+      <Text style={styles.Occasion}> {OccasionMap[leftImageIndex]}</Text>
         
-      <TouchableOpacity onPress={() => handleImagePress(imageMap[index * 2])}>
-      <View style={styles.imageContainer}>
-        <Image style={[styles.pageImage, { transform: [{ scale: zoomLevel }] }]} source={imageMap[index * 2]} />
-        <Text style={styles.imageText}>{DescriptionMap[index * 2]}</Text>
-      </View>
+      <TouchableOpacity onPress={() => handleImagePress(imageMap[rightImageIndex])}>
+        <View style={styles.imageContainer}>
+          <Image style={[styles.pageImage, { transform: [{ scale: zoomLevel }] }]} source={imageMap[rightImageIndex]} />
+          <Text style={styles.imageText}>{DescriptionMap[rightImageIndex]}</Text>
+        </View>
       </TouchableOpacity>
 
-      <Text style={styles.Occasion}> {OccasionMap[index * 2]}</Text>
+      <Text style={styles.Occasion}> {OccasionMap[rightImageIndex]}</Text>
       
       <Modal visible={modalVisible} transparent={true}>
         <View style={styles.modalContainer}>

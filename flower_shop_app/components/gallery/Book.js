@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { View, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import BookPage from './BookPage';
+import CoverPage from '/Users/michelangelozampieri/Desktop/Repositories/CS153/flower_shop_app/components/gallery/CoverPage.js';
+import EndPage from '/Users/michelangelozampieri/Desktop/Repositories/CS153/flower_shop_app/components/gallery/BackPage.js';
 
 const { width, height } = Dimensions.get('window');
 const BOOK_WIDTH = width * 0.8;
@@ -16,6 +18,9 @@ const Book = () => {
     [5, 6],
     [7, 8],
     [9, 10],
+    [11, 12],
+    [13, 14],
+    [15, 16],
   ];
 
   const zoomLevels = [1, 1, 1, 1, 1];
@@ -38,11 +43,16 @@ const Book = () => {
           style={styles.scrollView}
           showsHorizontalScrollIndicator={false}
         >
+          <CoverPage/>
           {pages.map((pagePair, index) => (
             <View key={index} style={styles.pageContainer}>
-              <BookPage index={pagePair[1]} zoomLevel={zoomLevels[index]} />
+              
+              <BookPage pages={pages} index={index} zoomLevel={zoomLevels[index]} />
             </View>
           ))}
+
+          <EndPage/>
+
         </ScrollView>
       </View>
     </View>
@@ -69,13 +79,6 @@ const styles = StyleSheet.create({
     width: BOOK_WIDTH,
     height: BOOK_HEIGHT,
     flexDirection: 'row',
-  },
-  page: {
-    width: BOOK_WIDTH / 2,
-    height: BOOK_HEIGHT,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRightWidth: 1,
   },
 });
 

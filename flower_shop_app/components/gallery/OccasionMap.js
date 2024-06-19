@@ -1,8 +1,8 @@
 export const OccasionMap = {
-    1: "Anniversary",
+    0: "Anniversary",
+    1: "Birthday",
     2: "Birthday",
-    3: "Birthday",
-    4: 'Funeral',
-    5: 'Graduation',
-    6: "Just Cause",
+    3: 'Funeral',
+    4: 'Graduation',
+    5: "Just Cause",
   };

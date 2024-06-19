@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
+import Header from '../Header';
 
 const Occasions = ({ navigation }) => {
   const occasions = [
@@ -15,6 +16,7 @@ const Occasions = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Header />
       <Text style={styles.title}>Select an Occasion</Text>
       <View style={styles.grid}>
         {occasions.map((occasion) => (
@@ -34,8 +36,6 @@ const Occasions = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
     padding: 20,
   },
@@ -46,16 +46,17 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: 'col',
     justifyContent: 'space-around',
+    alignItems: 'center',
+
   },
   button: {
-    width: '30%',
-    padding: 15,
+    marginVertical: 15,
+    padding: 10,
+    width: '80%',
     backgroundColor: '#007BFF',
     borderRadius: 5,
-    margin: 10,
     alignItems: 'center',
   },
   buttonText: {
