@@ -1,3 +1,5 @@
+// Storage.js
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const storeData = async (key, value) => {
@@ -14,6 +16,7 @@ export const fetchData = async (key) => {
     return value != null ? JSON.parse(value) : null;
   } catch (error) {
     console.error('Error fetching data:', error);
+    return null;
   }
 };
 

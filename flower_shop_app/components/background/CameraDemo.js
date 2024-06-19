@@ -1,7 +1,7 @@
 import { StatusBar} from "react-native";
 import { StyleSheet, View } from "react-native";
 
-import ImageViewer from "./ImageViewer";
+import ImageViewer from "../ImageViewer";
 
 const placeholderImage = require("../assets/flower1.jpg");
 

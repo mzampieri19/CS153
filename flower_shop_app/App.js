@@ -4,15 +4,15 @@ import { SafeAreaView, StyleSheet, View} from 'react-native';
 import HomePage from './components/HomePage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Gallery from './components/Gallery';
-import { ValueProvider } from './components/ValueContext';
+import Gallery from './components/gallery/Gallery';
+import { ValueProvider } from './components/background/ValueContext';
 import Services from './components/Services';
-import Occasions from './components/Occasions';
+import Occasions from './components/occasions/Occasions';
 import Pricing from './components/Pricing';
 import Story from './components/Story';
 import About from './components/About';
 import Careers from './components/Careers';
-import Survey from './components/Survey';
+import Survey from './components/occasions/Survey';
 
 const Stack = createStackNavigator();
 

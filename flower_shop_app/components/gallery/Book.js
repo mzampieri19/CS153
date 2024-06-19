@@ -40,7 +40,7 @@ const Book = () => {
         >
           {pages.map((pagePair, index) => (
             <View key={index} style={styles.pageContainer}>
-              <BookPage index={pagePair[0]} zoomLevel={zoomLevels[index]} />
+              <BookPage index={pagePair[1]} zoomLevel={zoomLevels[index]} />
             </View>
           ))}
         </ScrollView>

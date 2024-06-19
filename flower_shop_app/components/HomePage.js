@@ -1,87 +1,69 @@
 // HomePage.js
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
-import { storeData, fetchData, clearData } from './Storage';
-import EmptyBox from './EmptyBox';
+import { storeData, fetchData, clearData } from '/Users/michelangelozampieri/Desktop/Repositories/CS153/flower_shop_app/components/background/Storage.js';
 import { useNavigation } from '@react-navigation/native';
 
 const HomePage = () => {
-  const [loginMessage, setLoginMessage] = useState(''); 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [canLogin, setCanLogin] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false); //if user is logged in 
+  const [canLogin, setCanLogin] = useState(false); //if user enetred usernmae and password
   const navigation = useNavigation();
 
   useEffect(() => {
-    const clearLoginData = async () => {
-      await clearData('username');
-      await clearData('password');
-      setUsername('');
-      setPassword('');
-      setLoggedIn(false);
-    };
-
-    clearLoginData();
-  }, []);
-
-  useEffect(() => {
-    const loadLoginData = async () => {
-      const storedUsername = await fetchData('username');
-      const storedPassword = await fetchData('password');
+    const checkLoginStatus = async () => {
+      const storedUsername = await fetchData('username'); //fetch username
+      const storedPassword = await fetchData('password'); //fetch password
       if (storedUsername && storedPassword) {
-        setUsername(storedUsername);
-        setPassword(storedPassword);
-        setLoggedIn(true);
-        navigation.navigate('Services');
+        setUsername(storedUsername); //set username
+        setPassword(storedPassword); //set password
+        setLoggedIn(true); //set logged in to true
+        navigation.navigate('Services'); //brings them to services page
       }
     };
-    loadLoginData();
+    checkLoginStatus();
   }, [navigation]);
 
   useEffect(() => {
-    if (username.trim() !== '' && password.trim() !== '') {
-        setCanLogin(true);   
-    } else {
-        setCanLogin(false);
-    }
-}, [username, password]); 
+    //enable login button if both username and password are entered
+    //right now only checks if they are not empty
+    //Will change to check if they are correct
+    setCanLogin(username.trim() !== '' && password.trim() !== '');
+  }, [username, password]);
 
   const handleLogin = async () => {
     await storeData('username', username);
     await storeData('password', password);
     setLoggedIn(true);
-    navigation.navigate('Services'); 
+    navigation.navigate('Services'); //eedirect to services screen on successful login
   };
 
   const handleLogout = async () => {
-    await clearData('username');
-    await clearData('password');
+    await clearData('username'); //clear username
+    await clearData('password'); //clear password
     setUsername('');
     setPassword('');
     setLoggedIn(false);
   };
 
-  const navigateToServices = () => {
-    navigation.navigate('Services');
-  }; 
-
-  return ( //The one at the bottom is the first to be displayed
+  return (
     <View style={styles.container}>
+      {!loggedIn ? ( //if not logged in
         <ScrollView contentContainerStyle={styles.contentContainer}>
           <Text style={styles.title}>Welcome to Leilyz's Flower Shop</Text>
-          <Text style={styles.subtitle}>Information:</Text>
-          <Text style={styles.text}>Contact: ______</Text>
-          <Text style={styles.text}>Email: ______</Text>
-          <Text style={styles.text}>Instagram: ______</Text>
-          <Text style={styles.text}>Hours: ______</Text>
+          <Text style={styles.subtitle}>Information</Text>
+          <Text style={styles.text}>Contact: ____ </Text>
+          <Text style={styles.text}>Email: ____ </Text>
+          <Text style={styles.text}>Instagram: ____ </Text>
+          <Text style={styles.text}>Email: ____ </Text>
 
-          <Text style={styles.subtitle}>Disclaimer:</Text>
-          <Text style={styles.text}>Please place orders at minimum 1 week before desired delivery</Text>
+          <Text style={styles.subtitle}>Disclaimer</Text>
+          <Text style={styles.text}>Please place orders at minimum 1 week before desired delivery.</Text>
 
-          <EmptyBox height={20} />
+          <Text style={styles.subtitle}>Login:</Text>
 
-          <Text style={styles.subtitle}>Log in to see your past orders</Text>
           <TextInput
             style={styles.input}
             placeholder="Username"
@@ -95,18 +77,25 @@ const HomePage = () => {
             onChangeText={setPassword}
             secureTextEntry
           />
-          {canLogin ? (
-          <Button
-            title="Login"
-            onPress={handleLogin}
-            disabled={!canLogin} // Disable button if canLogin is false
-          />
-        ) : (
-          <View style={styles.messageContainer}>
-            <Text style={styles.messageText}>{loginMessage}</Text>
-          </View>
-        )}
+          {canLogin ? ( //if user enetr username and password
+            <Button
+              title="Login"
+              onPress={handleLogin}
+              disabled={!canLogin} // Disable button if canLogin is false
+            />
+          ) : ( //if user did not enter username and password
+            <View style={styles.messageContainer}>
+              <Text style={styles.messageText}>Please enter username and password</Text>
+            </View>
+          )}
         </ScrollView>
+      ) : ( //if logged in
+        <View style={styles.loggedInContainer}>
+          <Text style={styles.loggedInText}>Logged in as: {username}</Text>
+          <Button title="Logout" onPress={handleLogout} />
+          <Button title="Go to Services" onPress={() => navigation.navigate('Services')} />
+        </View>
+      )}
     </View>
   );
 };
@@ -116,6 +105,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F5FCFF',
     padding: 20,
+  },
+  contentContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
   },
   title: {
     fontSize: 24,
@@ -131,8 +124,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
+    marginVertical: 5,
     textAlign: 'center',
-    marginVertical: 3,
+    justifyContent: 'center',
   },
   input: {
     height: 40,
@@ -141,15 +135,14 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 12,
   },
-  button: {
-    backgroundColor: 'blue',
-    padding: 10,
-    marginVertical: 10,
+  loggedInContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  buttonText: {
-    fontSize: 24,
-    color: 'white',
-    textAlign: 'center',
+  loggedInText: {
+    fontSize: 20,
+    marginBottom: 20,
   },
   messageContainer: {
     alignItems: 'center',
