@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import Header from './Header';
 
 const LogInPage = ({navigation}) => {
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -72,7 +71,6 @@ const LogInPage = ({navigation}) => {
         <Text style={styles.buttonText}>About</Text>
         </Pressable>
       </View>
-
     </View>
   );
 };
