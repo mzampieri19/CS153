@@ -27,3 +27,6 @@
 
 4. 6-19-24
 - Worked more on home page, got persistence to work, username and password will be rememebered when page reloads. Also changed it so user needs to enter soemthing for username and password (in the future would like to have some sort of verification). Also fixed the book coponent so the correct images show up on the correct spot, it was an indexing issue. Also added a cover and back page to then add text to it. Did a bit of work on the occasions page, rearranged the buttons and added header, will continue to work on this next. 
+
+5. 6-24-24
+- Worked on Survey page, added toggle boxes for colors, decorations, and wrapping paper, when toggled they each give more options to choose from. Also began working on a Open AI API where users can enter keywords and the they will get a response back from Chat GPT to give them inspration for a bouquet to be made. Need to continue wokring on this, API key does not work will try to acquire own key. 
