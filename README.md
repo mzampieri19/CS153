@@ -30,3 +30,6 @@
 
 5. 6-24-24
 - Worked on Survey page, added toggle boxes for colors, decorations, and wrapping paper, when toggled they each give more options to choose from. Also began working on a Open AI API where users can enter keywords and the they will get a response back from Chat GPT to give them inspration for a bouquet to be made. Need to continue wokring on this, API key does not work will try to acquire own key. 
+
+6. 6-26-24
+- Continues wokring on the survey, tried to get establish a local host server but was not able to get it working. The app is able to send infomration up to professors's ngrok server that was used in class (I had access since I was creating it in class alongside the professor). I think the isssue is the server and app comunicating, will try creating a ngrok server and seeing if that helps. Also began to make an admin page to easily view the orders pulled from the server. 

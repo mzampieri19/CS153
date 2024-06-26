@@ -4,6 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
 import { storeData, fetchData, clearData } from '/Users/michelangelozampieri/Desktop/Repositories/CS153/flower_shop_app/components/background/Storage.js';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+
+
 
 const HomePage = () => {
   const [username, setUsername] = useState('');
@@ -11,6 +14,9 @@ const HomePage = () => {
   const [loggedIn, setLoggedIn] = useState(false); //if user is logged in 
   const [canLogin, setCanLogin] = useState(false); //if user enetred usernmae and password
   const navigation = useNavigation();
+
+  const server = 'http://localhost:3000/orders';
+  const group = 'flower_shop_app';
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -20,11 +26,16 @@ const HomePage = () => {
         setUsername(storedUsername); //set username
         setPassword(storedPassword); //set password
         setLoggedIn(true); //set logged in to true
-        navigation.navigate('Services'); //brings them to services page
+        navigation.navigate('Services', {username}); //brings them to services page
       }
     };
     checkLoginStatus();
   }, [navigation]);
+
+useEffect(() => {
+  logDataServer();
+}, [canLogin]);
+
 
   useEffect(() => {
     //enable login button if both username and password are entered
@@ -37,8 +48,22 @@ const HomePage = () => {
     await storeData('username', username);
     await storeData('password', password);
     setLoggedIn(true);
+    logDataServer();
     navigation.navigate('Services'); //eedirect to services screen on successful login
   };
+
+
+  const logDataServer = async () => {
+    //Connects and logs username and date accessed to server 
+    console.log('Logging data to server');
+    let score = 
+      await axios(
+        {method: 'post',
+          url: server+'/room',
+          data: {id:group, uid:username, data: new Date().toISOString()},
+        });
+      console.dir(score.data)
+      };
 
   const handleLogout = async () => {
     await clearData('username'); //clear username

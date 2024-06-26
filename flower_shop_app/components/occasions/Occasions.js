@@ -1,8 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import Header from '../Header';
 
-const Occasions = ({ navigation }) => {
+const Occasions = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const { username } = route.params || {}; // Get username from route params
   const occasions = [
     'Birthday',
     'Anniversary',
@@ -23,7 +27,7 @@ const Occasions = ({ navigation }) => {
           <Pressable
             key={occasion}
             style={styles.button}
-            onPress={() => navigation.navigate('Survey', { occasion })}
+            onPress={() => navigation.navigate('Survey', { occasion, username })}
           >
             <Text style={styles.buttonText}>{occasion}</Text>
           </Pressable>

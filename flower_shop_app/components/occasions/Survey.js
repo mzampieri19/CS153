@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Button, Alert, KeyboardAvoidingView, Platform, Switch, ScrollView } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Button, Alert, KeyboardAvoidingView, Platform, ScrollView, Switch } from 'react-native';
 import Slider from '@react-native-community/slider';
+import axios from 'axios';
+import { useRoute } from '@react-navigation/native';
 import ChatGPTDemo from './ChatGPTDemo';
 
-const Survey = ({ route }) => {
-  const { occasion } = route.params;
+const Survey = () => {
+  const route = useRoute();
+  const { occasion, username } = route.params || {};
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -18,10 +21,38 @@ const Survey = ({ route }) => {
   const [wrappingEnabled, setWrappingEnabled] = useState(false);
   const [selectedWrapping, setSelectedWrapping] = useState([]);
 
-  const handleSubmit = () => {
-    setSubmitted(true);
-    Alert.alert("Submission Successful", "Thank you for submitting the survey! We will get back to you soon.");
-  };
+  const server = 'http://localhost:3000';
+  const group = 'flower_shop_app'; 
+
+  const handleSubmit = async () => {
+    //Connects and logs username and date accessed to server 
+    console.log('Logging data to server');
+    
+    const surveyData = {
+      username, 
+      date : new Date(),
+      name,
+      email,
+      phone,
+      message,
+      quantity,
+      selectedColors: colorsEnabled ? selectedColors : [],
+      selectedDecorations: decorationsEnabled ? selectedDecorations : [],
+      selectedWrapping: wrappingEnabled ? selectedWrapping : [],
+    };
+
+    try {
+      const response = await axios.post('http://localhost:3000/orders', surveyData);
+      console.log('Order submitted successfully:', response.data);
+      setSubmitted(true);
+      Alert.alert('Order Submitted', 'Thank you for submitting your order!');
+      // Reset form or navigate to a different screen
+    } catch (error) {
+      console.error('Error submitting order:', error);
+      Alert.alert('Error', 'Failed to submit order. Please try again later.');
+    }
+    };
+
 
   const toggleColor = (color) => {
     if (selectedColors.includes(color)) {
@@ -53,7 +84,7 @@ const Survey = ({ route }) => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView style={styles.scrollView}>
-        <Text style={styles.title}>{occasion} Survey</Text>
+        <Text style={styles.title}>{occasion} Survey {username}</Text>
         <Text style={styles.prompt}>Your Name:</Text>
         <TextInput
           style={styles.input}

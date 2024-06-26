@@ -1,8 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import Header from './Header';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-const LogInPage = ({navigation}) => {
+
+const LogInPage = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const { username } = route.params || {};
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -14,61 +20,61 @@ const LogInPage = ({navigation}) => {
           style={styles.button}
           onPress={() => navigation.navigate('Gallery')}
         >
-        <Text style={styles.buttonText}>Gallery</Text>
+          <Text style={styles.buttonText}>Gallery</Text>
         </Pressable>
       </View>
 
       <View style={styles.buttonsContainer}>
         <Pressable
           style={styles.button}
-          onPress={() => navigation.navigate('Occasions')}
+          onPress={() => navigation.navigate('Occasions', { username })}
         >
-        <Text style={styles.buttonText}>Occasions</Text>
+          <Text style={styles.buttonText}>Occasions</Text>
         </Pressable>
       </View>
-
-      <View style={styles.buttonsContainer}>
+    <View style={styles.buttonsContainer}>
         <Pressable
           style={styles.button}
           onPress={() => navigation.navigate('Pricing')}
         >
-        <Text style={styles.buttonText}>Pricing</Text>
+          <Text style={styles.buttonText}>Pricing</Text>
         </Pressable>
-      </View>
-
-      <View style={styles.buttonsContainer}>
+      </View><View style={styles.buttonsContainer}>
         <Pressable
           style={styles.button}
           onPress={() => navigation.navigate('Careers')}
         >
-        <Text style={styles.buttonText}>Careers</Text>
+          <Text style={styles.buttonText}>Careers</Text>
         </Pressable>
-      </View>
-
-      <View style={styles.buttonsContainer}>
+      </View><View style={styles.buttonsContainer}>
         <Pressable
           style={styles.button}
           onPress={() => navigation.navigate('Story')}
         >
-        <Text style={styles.buttonText}>Story</Text>
+          <Text style={styles.buttonText}>Story</Text>
         </Pressable>
       </View>
-
       <View style={styles.buttonsContainer}>
         <Pressable
           style={styles.button}
           onPress={() => navigation.navigate('Account')}
         >
-        <Text style={styles.buttonText}>Account</Text>
+          <Text style={styles.buttonText}>Account</Text>
         </Pressable>
-      </View>
-
-      <View style={styles.buttonsContainer}>
+      </View><View style={styles.buttonsContainer}>
         <Pressable
           style={styles.button}
           onPress={() => navigation.navigate('About')}
         >
-        <Text style={styles.buttonText}>About</Text>
+          <Text style={styles.buttonText}>About</Text>
+        </Pressable>
+      </View>
+      <View style={styles.buttonsContainer}>
+        <Pressable
+          style={styles.button}
+          onPress={() => navigation.navigate('AdminPage')}
+        >
+          <Text style={styles.buttonText}>Admin</Text>
         </Pressable>
       </View>
     </View>
