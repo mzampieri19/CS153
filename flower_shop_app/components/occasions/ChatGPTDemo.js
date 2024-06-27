@@ -8,6 +8,7 @@ const APIdemo = () => {
     const [keywords, setKeywords] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [loggedResponse, setLoggedResponse] = useState(null); // State to store logged response
 
     // Function to handle API request
     const getResponse = async () => {
@@ -46,10 +47,21 @@ const APIdemo = () => {
         }
     };
 
+    // Function to log the selected response
+    const logResponse = (response) => {
+        setLoggedResponse(response);
+    };
+
     const ChatResponse = ({ message }) => (
         <View style={styles.responseContainer}>
             <Text style={styles.responseText}>Your Unique Bouquet:</Text>
             <Text style={styles.responseText}>{message.content}</Text>
+            <Button
+                onPress={() => logResponse(message.content)} // Log the response on button press
+                title="Log Response"
+                color="green"
+                accessibilityLabel="Log Response"
+            />
         </View>
     );
 
@@ -82,6 +94,13 @@ const APIdemo = () => {
                 renderItem={({ item }) => <ChatResponse message={item.message} />}
                 style={{ marginTop: 20 }}
             />
+
+            {loggedResponse && (
+                <View style={styles.responseContainer}>
+                    <Text style={styles.responseText}>Logged Response:</Text>
+                    <Text style={styles.responseText}>{loggedResponse}</Text>
+                </View>
+            )}
         </SafeAreaView>
     );
 };
@@ -129,5 +148,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
 });
+
+export const GPTresponse = loggedResponse; // Export response for testing purposes
 
 export default APIdemo;

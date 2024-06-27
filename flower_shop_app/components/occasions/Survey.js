@@ -4,6 +4,7 @@ import Slider from '@react-native-community/slider';
 import axios from 'axios';
 import { useRoute } from '@react-navigation/native';
 import ChatGPTDemo from './ChatGPTDemo';
+import { GPTresponse } from './ChatGPTDemo';
 
 const Survey = () => {
   const route = useRoute();
@@ -20,12 +21,15 @@ const Survey = () => {
   const [selectedDecorations, setSelectedDecorations] = useState([]);
   const [wrappingEnabled, setWrappingEnabled] = useState(false);
   const [selectedWrapping, setSelectedWrapping] = useState([]);
-
-  const server = 'https://d2e2-108-20-29-47.ngrok-free.app/orders';
+  const [loggedResponse, setLoggedResponse] = useState(null);
+  const server = 'https://3384-108-20-29-47.ngrok-free.app/orders';
+  
+  
   const handleSubmit = async () => {
     //Connects and logs username and date accessed to server 
     console.log('Logging data to server');
-    
+    setLoggedResponse(GPTresponse);
+
     const surveyData = {
       username, 
       occasion,
@@ -38,6 +42,7 @@ const Survey = () => {
       selectedColors: colorsEnabled ? selectedColors : [],
       selectedDecorations: decorationsEnabled ? selectedDecorations : [],
       selectedWrapping: wrappingEnabled ? selectedWrapping : [],
+      loggedResponse,
     };
 
     try {
@@ -226,7 +231,8 @@ const Survey = () => {
             {wrappingEnabled && (
               <Text style={styles.submittedText}>Wrapping: {selectedWrapping.join(', ')}</Text>
             )}
-          </View>
+            <Text style={styles.submittedText}>Bouquet idea to be sent to team: {loggedResponse}</Text>
+        </View>
         )}
       </ScrollView>
     </KeyboardAvoidingView>

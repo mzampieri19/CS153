@@ -7,7 +7,7 @@ const AdminPage = () => {
   const [loading, setLoading] = useState(true);
   const [visibleOrders, setVisibleOrders] = useState(5);
 
-  const server = 'https://d2e2-108-20-29-47.ngrok-free.app';
+  const server = 'https://3384-108-20-29-47.ngrok-free.app';
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -45,6 +45,7 @@ const AdminPage = () => {
       <Text style={styles.orderText}><Text style={styles.label}>Colors:</Text> {item.selectedColors?.join(', ') || 'N/A'}</Text>
       <Text style={styles.orderText}><Text style={styles.label}>Decorations:</Text> {item.selectedDecorations?.join(', ') || 'N/A'}</Text>
       <Text style={styles.orderText}><Text style={styles.label}>Wrapping:</Text> {item.selectedWrapping?.join(', ') || 'N/A'}</Text>
+      <Text style={styles.orderText}><Text style={styles.label}>Generated Idea:</Text> {item.idea?.join(', ') || 'N/A'}</Text>
     </View>
   );
 
