@@ -1,18 +1,14 @@
-// HomePage.js
-
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ScrollView, ImageBackground } from 'react-native';
 import { storeData, fetchData, clearData } from '/Users/michelangelozampieri/Desktop/Repositories/CS153/flower_shop_app/components/background/Storage.js';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
-
-
 const HomePage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false); //if user is logged in 
-  const [canLogin, setCanLogin] = useState(false); //if user enetred usernmae and password
+  const [loggedIn, setLoggedIn] = useState(false); // if user is logged in 
+  const [canLogin, setCanLogin] = useState(false); // if user entered username and password
   const navigation = useNavigation();
 
   const server = 'http://localhost:3000/orders';
@@ -20,27 +16,26 @@ const HomePage = () => {
 
   useEffect(() => {
     const checkLoginStatus = async () => {
-      const storedUsername = await fetchData('username'); //fetch username
-      const storedPassword = await fetchData('password'); //fetch password
+      const storedUsername = await fetchData('username'); // fetch username
+      const storedPassword = await fetchData('password'); // fetch password
       if (storedUsername && storedPassword) {
-        setUsername(storedUsername); //set username
-        setPassword(storedPassword); //set password
-        setLoggedIn(true); //set logged in to true
-        navigation.navigate('Services', {username}); //brings them to services page
+        setUsername(storedUsername); // set username
+        setPassword(storedPassword); // set password
+        setLoggedIn(true); // set logged in to true
+        navigation.navigate('Services', { username }); // brings them to services page
       }
     };
     checkLoginStatus();
   }, [navigation]);
 
-useEffect(() => {
-  logDataServer();
-}, [canLogin]);
-
+  useEffect(() => {
+    logDataServer();
+  }, [canLogin]);
 
   useEffect(() => {
-    //enable login button if both username and password are entered
-    //right now only checks if they are not empty
-    //Will change to check if they are correct
+    // enable login button if both username and password are entered
+    // right now only checks if they are not empty
+    // Will change to check if they are correct
     setCanLogin(username.trim() !== '' && password.trim() !== '');
   }, [username, password]);
 
@@ -49,34 +44,40 @@ useEffect(() => {
     await storeData('password', password);
     setLoggedIn(true);
     logDataServer();
-    navigation.navigate('Services'); //eedirect to services screen on successful login
+    navigation.navigate('Services'); // redirect to services screen on successful login
   };
 
-
   const logDataServer = async () => {
-    //Connects and logs username and date accessed to server 
+    // Connects and logs username and date accessed to server 
     console.log('Logging data to server');
-    let score = 
+    let score =
       await axios(
-        {method: 'post',
-          url: server+'/room',
-          data: {id:group, uid:username, data: new Date().toISOString()},
+        {
+          method: 'post',
+          url: server + '/room',
+          data: { id: group, uid: username, data: new Date().toISOString() },
         });
-      console.dir(score.data)
-      };
+    console.dir(score.data)
+  };
 
   const handleLogout = async () => {
-    await clearData('username'); //clear username
-    await clearData('password'); //clear password
+    await clearData('username'); // clear username
+    await clearData('password'); // clear password
     setUsername('');
     setPassword('');
     setLoggedIn(false);
   };
 
   return (
-    <View style={styles.container}>
-      {!loggedIn ? ( //if not logged in
-        <ScrollView contentContainerStyle={styles.contentContainer}>
+    <View style = {styles.container}>
+      <View style = {styles.backgroundContainer}>
+        <ImageBackground 
+          source = {require('/Users/michelangelozampieri/Desktop/Repositories/CS153/flower_shop_app/assets/background.png')} 
+          style = {styles.image} 
+        />
+      </View>
+      {!loggedIn ? (
+        <ScrollView contentContainerStyle = {styles.contentContainer}>
           <Text style={styles.title}>Welcome to Leilyz's Flower Shop</Text>
           <Text style={styles.subtitle}>Information</Text>
           <Text style={styles.text}>Contact: ____ </Text>
@@ -102,27 +103,28 @@ useEffect(() => {
             onChangeText={setPassword}
             secureTextEntry
           />
-          {canLogin ? ( //if user enetr username and password
+          {canLogin ? ( // if user entered username and password
             <Button
               title="Login"
               onPress={handleLogin}
               disabled={!canLogin} // Disable button if canLogin is false
             />
-          ) : ( //if user did not enter username and password
+          ) : ( // if user did not enter username and password
             <View style={styles.messageContainer}>
               <Text style={styles.messageText}>Please enter username and password</Text>
             </View>
           )}
         </ScrollView>
-      ) : ( //if logged in
+      ) : (
         <View style={styles.loggedInContainer}>
-          <Text style={styles.loggedInText}>Logged in as: {username}</Text>
+          <Text style={styles.loggedInText}>Welcome, {username}!</Text>
           <Button title="Logout" onPress={handleLogout} />
-          <Button title="Go to Services" onPress={() => navigation.navigate('Services')} />
+          <Button title="Services" onPress={() => navigation.navigate('Services', { username })} />
         </View>
-      )}
+        )}
     </View>
-  );
+  ); 
+
 };
 
 const styles = StyleSheet.create({
@@ -131,31 +133,41 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
     padding: 20,
   },
+  backgroundContainer: {
+    ...StyleSheet.absoluteFillObject,
+    opacity: 0.7,
+  },
+  image: {
+    flex: 1,
+  },
   contentContainer: {
     flexGrow: 1,
     justifyContent: 'center',
   },
   title: {
-    fontSize: 24,
+    fontSize: 32,
     textAlign: 'center',
     marginVertical: 10,
     fontWeight: 'bold',
+    color: 'white',
   },
   subtitle: {
     fontSize: 18,
     textAlign: 'center',
     marginVertical: 10,
     fontWeight: 'bold',
+    color: 'white',
   },
   text: {
     fontSize: 16,
     marginVertical: 5,
     textAlign: 'center',
     justifyContent: 'center',
+    color: 'white',
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: 'white',
     borderWidth: 1,
     padding: 10,
     marginBottom: 12,

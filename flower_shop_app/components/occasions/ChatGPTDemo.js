@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SafeAreaView, Text, TextInput, Button, FlatList, View, StyleSheet, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 import { API_KEY } from '../Api-key';
+import { useValue } from '../background/ValueContext';
 
 const APIdemo = () => {
     const [data, setData] = useState([]);
@@ -9,6 +10,7 @@ const APIdemo = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [loggedResponse, setLoggedResponse] = useState(null); // State to store logged response
+    const { currentValue, setCurrentValue } = useValue();
 
     // Function to handle API request
     const getResponse = async () => {
@@ -28,15 +30,16 @@ const APIdemo = () => {
                 },
             };
             const promptMessage = `Create a custom flower bouquet idea with the following keywords: ${keywords}`;
-    
+
             const msg_data = {
                 "model": "gpt-3.5-turbo",
-                "messages": [{"role": "user", "content": promptMessage}],
+                "messages": [{ "role": "user", "content": promptMessage }],
                 "temperature": 0.7
             };
-    
+
             const response = await axios.post(url, msg_data, config);
             const result = response.data;
+            setCurrentValue({ ...currentValue, bouquet: result });
             setData(result.choices);
             setError(null); // Clear any previous errors
         } catch (error) {
@@ -73,34 +76,36 @@ const APIdemo = () => {
                 style={styles.input}
                 onChangeText={text => setKeywords(text)}
                 value={keywords}
-                placeholder="Enter keywords (e.g., roses, birthday)"
+                placeholder="Enter keywords"
+                placeholderTextColor="white"
             />
 
             <Button
                 onPress={getResponse}
-                title={loading ? 'Thinking...' : 'Create Bouquet'}
-                color="blue"
+                title={loading ? 'Thinking...' : 'Create Bouquet!'}
+                color="white"
                 disabled={loading}
                 accessibilityLabel="Create Bouquet"
             />
 
-            {loading && <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 20 }} />}
+            {loading && <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 10 }} />}
 
             {error && <Text style={styles.errorText}>{error}</Text>}
 
-            <FlatList
-                data={data}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => <ChatResponse message={item.message} />}
-                style={{ marginTop: 20 }}
-            />
+            <View style={styles.responsesContainer}>
+                <FlatList
+                    data={data}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item }) => <ChatResponse message={item.message} />}
+                />
 
-            {loggedResponse && (
-                <View style={styles.responseContainer}>
-                    <Text style={styles.responseText}>Logged Response:</Text>
-                    <Text style={styles.responseText}>{loggedResponse}</Text>
-                </View>
-            )}
+                {loggedResponse && (
+                    <View style={styles.responseContainer}>
+                        <Text style={styles.responseText}>Logged Response:</Text>
+                        <Text style={styles.responseText}>{loggedResponse}</Text>
+                    </View>
+                )}
+            </View>
         </SafeAreaView>
     );
 };
@@ -111,36 +116,40 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-        backgroundColor: '#f8f8f8',
     },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: 20,
+        color: 'white',
     },
     input: {
         height: 40,
-        width: '100%',
+        width: '90%',
         maxWidth: 400,
         marginVertical: 10,
         borderWidth: 1,
         borderRadius: 5,
         padding: 10,
     },
+    responsesContainer: {
+        flex: 1,
+        width: '100%',
+        marginTop: 10,
+    },
     responseContainer: {
-        backgroundColor: 'lightblue',
-        marginVertical: 10,
-        padding: 20,
+        marginVertical: 5,
+        padding: 8,
         alignItems: 'center',
         borderRadius: 8,
         borderWidth: 1,
-        borderColor: '#ddd',
     },
     responseText: {
         fontSize: 18,
         fontWeight: 'bold',
-        marginBottom: 10,
+        marginBottom: 5,
+        color : 'white',
     },
     errorText: {
         color: 'red',
@@ -148,7 +157,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
 });
-
-export const GPTresponse = loggedResponse; // Export response for testing purposes
 
 export default APIdemo;

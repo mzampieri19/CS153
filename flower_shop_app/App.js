@@ -18,8 +18,9 @@ import AdminPage from './components/AdminPage';
 const Stack = createStackNavigator();
 
 const MainApp = () => {
+  const initialData = { username: 'anon', bouquet: 'none'}
   return (
-    <ValueProvider>
+    <ValueProvider data = {initialData}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={HomePage} />
@@ -41,6 +42,7 @@ const MainApp = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#F9F578',
   },
 });
 

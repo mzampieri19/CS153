@@ -30,14 +30,15 @@ const Header = () => {
 const styles = StyleSheet.create({
   headerContainer: {
     width: '100%',
-    padding: 10,
+    height: 30,
+    padding: 0,
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    backgroundColor: '#f5fcff',
+
   },
   username: {
-    fontSize: 24,
-    color: '#333',
+    fontSize: 18,
+    color: 'white',
     justifyContent: 'center',
   },
 });

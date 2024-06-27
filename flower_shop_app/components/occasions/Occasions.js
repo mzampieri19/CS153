@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Pressable, StyleSheet, ImageBackground } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Header from '../Header';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Occasions = () => {
   const navigation = useNavigation();
@@ -18,22 +19,32 @@ const Occasions = () => {
     'Other',
   ];
 
+
   return (
     <View style={styles.container}>
+      <View style={styles.backgroundContainer}>
+        <ImageBackground
+          source={require('/Users/michelangelozampieri/Desktop/Repositories/CS153/flower_shop_app/assets/background.png')}
+          style={styles.image}
+        />
+      </View>
       <Header />
       <Text style={styles.title}>Select an Occasion</Text>
-      <View style={styles.grid}>
-        {occasions.map((occasion) => (
-          <Pressable
-            key={occasion}
-            style={styles.button}
-            onPress={() => navigation.navigate('Survey', { occasion, username })}
-          >
-            <Text style={styles.buttonText}>{occasion}</Text>
-          </Pressable>
-        ))}
+      <Text style={styles.subtitle}>Select an occasion to be brought to a survey screen to place an order</Text>
+        <ScrollView>
+          <View style={styles.grid}>
+            {occasions.map((occasion) => (
+              <Pressable
+                key={occasion}
+                style={styles.button}
+                onPress={() => navigation.navigate('Survey', { occasion, username })}
+              >
+                <Text style={styles.buttonText}>{occasion}</Text>
+              </Pressable>
+            ))}
+          </View>
+        </ScrollView>
       </View>
-    </View>
   );
 };
 
@@ -48,25 +59,40 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
+    color: 'white',
   },
   grid: {
     flexDirection: 'col',
-    justifyContent: 'space-around',
     alignItems: 'center',
 
   },
   button: {
-    marginVertical: 15,
+    marginVertical: 10,
     padding: 10,
-    width: '80%',
-    backgroundColor: '#007BFF',
+    width: '100%',
+    backgroundColor: '#97FF87',
     borderRadius: 5,
     alignItems: 'center',
+    marginBottom: 100,
+    borderRadius: 1000,
   },
   buttonText: {
-    color: '#FFF',
-    fontSize: 18,
+    color: 'black',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    fontSize: 16,
     textAlign: 'center',
+    marginBottom: 20,
+    color: 'white',
+  },
+  backgroundContainer: {
+    ...StyleSheet.absoluteFillObject,
+    opacity: 0.7,
+  },
+  image: {
+    flex: 1,
   },
 });
 

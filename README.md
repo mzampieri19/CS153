@@ -14,6 +14,8 @@
 
 - Flower_shop_app: File for the flower_shop_app that is the main project for the class. 
 
+- Flower-shop-server: Files for a local host server, this server is used to upload the orders into a JSON file and then they are pulled down in a composite form. The local server is then launched using ngrok. 
+
 ### Flower Shop App Edit History 
 
 1. 6-11-24
@@ -33,3 +35,6 @@
 
 6. 6-26-24
 - Continued wokring on the survey, tried to get establish a local host server but was not able to get it working. The app is able to send infomration up to professors's ngrok server that was used in class (I had access since I was creating it in class alongside the professor). I think the isssue is the server and app comunicating, will try creating a ngrok server and seeing if that helps. Also began to make an admin page to easily view the orders pulled from the server. After coming back from it, was able to get the ngrok server to work, now the app can take orders from the users, sends them up to the server, and then takes them back down in the admin page. For some reason this only works when running expo on the phone and not when running the app through the site. Also need to manually update the server name eveytime a new ngrok server is created, both in Survey and AdminPage. Got Open-Ai api key and got chat gpt to work in the app, having som trouble exporting the response so it can be viewed in the order summary, I think it is an exporting issue will continue to work on it. 
+
+7. 6-27-24
+- Was able to get the ChatGPT reponse to be visible and portable to the server. FIxed it by making the API response a global variable and using it in the different components, now the information is visible in the admin page as well. Next and last feature I want to add would be the idea to have user's "create" their own bouquets by having the emojis. This would allow me to fullt use the phone's capabilities. I finally added some style to the app, this style is most likely temporary as I want my girlfriend to choose how the app is styled as this is for her, for now I added a background image which I created to all the pages, and changed all the text to white (as the image is black) and tweaked the buttons a bit. I would say right now I reached a viable profuct version of my app. I am very satisfied with my work so far and look forward to adding the last feature and finishing style as well. 
