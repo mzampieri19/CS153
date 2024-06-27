@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity, Modal, Dimensions } from 'react-native';
-import { imageMap } from './ImageMap'; 
-import { DescriptionMap } from './DescriptionMap'; 
-import { OccasionMap } from './OccasionMap'; 
+import { imageMap } from '/Users/michelangelozampieri/Desktop/Repositories/CS153/flower_shop_app/components/gallery/ImageMap.js'; 
+import { DescriptionMap } from '/Users/michelangelozampieri/Desktop/Repositories/CS153/flower_shop_app/components/gallery/DescriptionMap.js'; 
+import { OccasionMap } from '/Users/michelangelozampieri/Desktop/Repositories/CS153/flower_shop_app/components/gallery/OccasionMap.js'; 
 
 const { width, height } = Dimensions.get('window');
 
@@ -10,34 +10,34 @@ const BookPage = ({ pages, index, zoomLevel }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
+  const leftImageIndex = index;
+  const rightImageIndex = index + 1;
+
   const handleImagePress = (image) => {
     setSelectedImage(image);
     setModalVisible(true);
   };
 
-  const leftImageIndex = pages[index][0] - 1; // Adjust for zero-based index
-  const rightImageIndex = pages[index][1] - 1; // Adjust for zero-based index
-
   return (
+    //top image
     <View style={styles.container}>
-
       <TouchableOpacity onPress={() => handleImagePress(imageMap[leftImageIndex])}>
         <View style={styles.imageContainer}>
-          <Image style={[styles.pageImage, { transform: [{ scale: zoomLevel }] }]} source={imageMap[leftImageIndex]} />
-          <Text style={styles.imageText}>{DescriptionMap[leftImageIndex]}</Text>
+        <Image style={[styles.pageImage, { transform: [{ scale: zoomLevel }] }]} source={imageMap[leftImageIndex]} />
+        <Text style={styles.imageText}>{DescriptionMap[leftImageIndex]}</Text>
         </View>
       </TouchableOpacity>
 
-      <Text style={styles.Occasion}> {OccasionMap[leftImageIndex]}</Text>
-        
+      <Text style={styles.Occasion}>{OccasionMap[leftImageIndex]}</Text>
+      
       <TouchableOpacity onPress={() => handleImagePress(imageMap[rightImageIndex])}>
         <View style={styles.imageContainer}>
-          <Image style={[styles.pageImage, { transform: [{ scale: zoomLevel }] }]} source={imageMap[rightImageIndex]} />
-          <Text style={styles.imageText}>{DescriptionMap[rightImageIndex]}</Text>
+        <Image style={[styles.pageImage, { transform: [{ scale: zoomLevel }] }]} source={imageMap[rightImageIndex]} />
+        <Text style={styles.imageText}>{DescriptionMap[rightImageIndex]}</Text>
         </View>
       </TouchableOpacity>
 
-      <Text style={styles.Occasion}> {OccasionMap[rightImageIndex]}</Text>
+      <Text style={styles.Occasion}>{OccasionMap[rightImageIndex]}</Text>
       
       <Modal visible={modalVisible} transparent={true}>
         <View style={styles.modalContainer}>
@@ -48,7 +48,6 @@ const BookPage = ({ pages, index, zoomLevel }) => {
       </Modal>
 
     </View>
-
   );
 };
 
@@ -71,7 +70,8 @@ const styles = StyleSheet.create({
     height: 200,
     margin: 7,
     borderWidth: 2,
-    overflow: 'hidden',
+    marginLeft: 55,
+    marginRight: 55,
     justifyContent: 'center',
     alignItems: 'center',
   },

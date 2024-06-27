@@ -77,18 +77,18 @@ const APIdemo = () => {
                 onChangeText={text => setKeywords(text)}
                 value={keywords}
                 placeholder="Enter keywords"
-                placeholderTextColor="white"
+                placeholderTextColor="gray"
             />
 
             <Button
                 onPress={getResponse}
                 title={loading ? 'Thinking...' : 'Create Bouquet!'}
-                color="white"
+                color="black"
                 disabled={loading}
                 accessibilityLabel="Create Bouquet"
             />
 
-            {loading && <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 10 }} />}
+            {loading && <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 0 }} />}
 
             {error && <Text style={styles.errorText}>{error}</Text>}
 
@@ -122,13 +122,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: 20,
-        color: 'white',
+        color: 'black',
     },
     input: {
         height: 40,
         width: '90%',
         maxWidth: 400,
-        marginVertical: 10,
+        marginVertical: 0,
         borderWidth: 1,
         borderRadius: 5,
         padding: 10,
@@ -136,10 +136,10 @@ const styles = StyleSheet.create({
     responsesContainer: {
         flex: 1,
         width: '100%',
-        marginTop: 10,
+        marginTop: 0,
     },
     responseContainer: {
-        marginVertical: 5,
+        marginVertical: 0,
         padding: 8,
         alignItems: 'center',
         borderRadius: 8,
@@ -148,8 +148,8 @@ const styles = StyleSheet.create({
     responseText: {
         fontSize: 18,
         fontWeight: 'bold',
-        marginBottom: 5,
-        color : 'white',
+        marginBottom: 0,
+        color : 'black',
     },
     errorText: {
         color: 'red',

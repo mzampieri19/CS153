@@ -9,6 +9,7 @@ const BackPage = () => {
   return (
     <View style={[styles.container, { width: BOOK_WIDTH, height: BOOK_HEIGHT }]}>
       <Text style={styles.coverText}>End Page</Text>
+      <Text style={styles.text}>Scroll left to view again             {'<'}---</Text>
     </View>
   );
 };
@@ -19,12 +20,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: 'black',
-    backgroundColor: 'lightgray',
+    backgroundColor: 'brown',
   },
   coverText: {
     fontSize: 24,
     fontWeight: 'bold',
   },
+  text: {
+    fontSize: 16,
+    marginVertical: 5,
+    textAlign: 'center',
+    justifyContent: 'center',
+    color: 'black',
+  }
 });
 
 export default BackPage;

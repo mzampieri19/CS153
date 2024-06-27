@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
   username: {
     fontSize: 18,
-    color: 'white',
+    color: 'black',
     justifyContent: 'center',
   },
 });

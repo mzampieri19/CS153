@@ -9,6 +9,7 @@ const CoverPage = () => {
   return (
     <View style={[styles.container, { width: BOOK_WIDTH, height: BOOK_HEIGHT }]}>
       <Text style={styles.coverText}>Cover Page</Text>
+      <Text style={styles.text}>Swipe right to scroll through some selected bouquets           ---{'>'}</Text>
     </View>
   );
 };
@@ -18,12 +19,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'black',
-    backgroundColor: 'lightgray',
+    backgroundColor: 'brown',
   },
   coverText: {
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  text: {
+    fontSize: 16,
+    marginVertical: 5,
+    textAlign: 'center',
+    justifyContent: 'center',
+    color: 'black',
   },
 });
 

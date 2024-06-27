@@ -122,7 +122,8 @@ const Survey = () => {
               accessibilityLabel="Phone number input field"
             />
             <Text style={styles.title}>Bouquet Idea:</Text>
-            <Text style={styles.text}>Can't think of specifics for your bouquet? Enter some keywords in the prompt below and you will get a unique bouquet idea!</Text>
+            <Text style={styles.AItext}>Can't think of specifics for your bouquet? Enter some keywords in the prompt below and you will get a unique bouquet idea!</Text>
+            
             <ChatGPTDemo />
 
             <Text style={styles.prompt}>Quantity of flowers: {quantity}</Text>
@@ -130,7 +131,7 @@ const Survey = () => {
               style={styles.slider}
               minimumValue={0}
               maximumValue={100}
-              step={4}
+              step={6}
               value={quantity}
               onValueChange={(value) => setQuantity(value)}
               minimumTrackTintColor="#1fb28a"
@@ -140,7 +141,7 @@ const Survey = () => {
             />
 
             <View style={styles.toggleContainer}>
-              <Text style={styles.prompt}>Would you like to select colors?</Text>
+              <Text style={styles.prompt}>Select colors?</Text>
               <Switch
                 value={colorsEnabled}
                 onValueChange={setColorsEnabled}
@@ -149,7 +150,7 @@ const Survey = () => {
 
             {colorsEnabled && (
               <View style={styles.optionsContainer}>
-                <Text style={styles.prompt}>Choose your favorite colors:</Text>
+                <Text style={styles.prompt}>Choose the colors:</Text>
                 {['Red', 'Yellow', 'Pink', 'White', 'Purple'].map((color) => (
                   <View key={color} style={styles.option}>
                     <Text>{color}</Text>
@@ -163,7 +164,7 @@ const Survey = () => {
             )}
 
             <View style={styles.toggleContainer}>
-              <Text style={styles.prompt}>Would you like to select decorations?</Text>
+              <Text style={styles.prompt}>Select decorations?</Text>
               <Switch
                 value={decorationsEnabled}
                 onValueChange={setDecorationsEnabled}
@@ -185,7 +186,7 @@ const Survey = () => {
             )}
 
             <View style={styles.toggleContainer}>
-              <Text style={styles.prompt}>Would you like to select wrapping?</Text>
+              <Text style={styles.prompt}>Select wrapping?</Text>
               <Switch
                 value={wrappingEnabled}
                 onValueChange={setWrappingEnabled}
@@ -249,7 +250,7 @@ const Survey = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
     padding: 30,
     width: '100%',
@@ -271,12 +272,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
     marginBottom: 15,
-    color: 'white',
+    color: 'black',
+  },
+  AItext: {
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 5,
+    marginBottom: 10,
+    marginLeft: 100,
+    marginRight: 100,
+    color: 'black',
   },
   prompt: {
-    fontSize: 18,
+    fontSize: 16,
     marginTop: 10,
-    color: 'white',
+    color: 'black',
+    padding: 10,
+    textAlign: 'center', // Center text horizontally
   },
   text: {
     fontSize: 16,
@@ -285,16 +297,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    color: 'white',
+    color: 'black',
   },
   input: {
     width: '100%',
-    height: 40,
+    height: 30, // Adjust height to make it smaller
     borderWidth: 1,
     borderColor: '#CCCCCC',
     borderRadius: 5,
     paddingHorizontal: 10,
     marginTop: 5,
+    textAlign: 'center', // Center text horizontally
   },
   messageInput: {
     height: 120,
@@ -302,7 +315,7 @@ const styles = StyleSheet.create({
   },
   slider: {
     width: '100%',
-    marginTop: 10,
+    marginTop: 0,
     alignContent: 'center',
     justifyContent: 'center',
   },
@@ -329,11 +342,12 @@ const styles = StyleSheet.create({
   },
   submittedText: {
     fontSize: 16,
-    color: 'white',
+    color: 'black',
     marginTop: 5,
     justifyContent: 'center',
     alignItems: 'center',
   },
 });
+
 
 export default Survey;

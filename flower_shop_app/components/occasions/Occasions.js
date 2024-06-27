@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
-    color: 'white',
+    color: 'black',
   },
   grid: {
     flexDirection: 'col',
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     marginBottom: 20,
-    color: 'white',
+    color: 'black',
   },
   backgroundContainer: {
     ...StyleSheet.absoluteFillObject,
