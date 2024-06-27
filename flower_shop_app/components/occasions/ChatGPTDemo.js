@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { SafeAreaView, Text, TextInput, Button, FlatList, View, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, Text, TextInput, Button, FlatList, View, StyleSheet, ActivityIndicator } from 'react-native';
 import axios from 'axios';
-
-// Constant API key
-const API_KEY = "";
+import { API_KEY } from '../Api-key';
 
 const APIdemo = () => {
     const [data, setData] = useState([]);
-    const [keywords, setKeywords] = useState("");
+    const [keywords, setKeywords] = useState('');
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     // Function to handle API request
     const getResponse = async () => {
+        if (!keywords.trim()) {
+            setError('Keywords cannot be empty.');
+            return;
+        }
+
         try {
             setLoading(true);
             const url = 'https://api.openai.com/v1/chat/completions';
@@ -32,55 +36,52 @@ const APIdemo = () => {
     
             const response = await axios.post(url, msg_data, config);
             const result = response.data;
-            setData(result);
+            setData(result.choices);
+            setError(null); // Clear any previous errors
         } catch (error) {
             console.error('Error fetching data:', error);
-            // Handle specific errors
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                console.error('Server responded with:', error.response.data);
-            } else if (error.request) {
-                // The request was made but no response was received
-                console.error('No response received:', error.request);
-            } else {
-                // Something happened in setting up the request that triggered an error
-                console.error('Error setting up request:', error.message);
-            }
+            setError('Failed to fetch data. Please try again later.');
         } finally {
             setLoading(false);
         }
     };
 
-    const ChatResponse = ({ role, content }) => (
+    const ChatResponse = ({ message }) => (
         <View style={styles.responseContainer}>
             <Text style={styles.responseText}>Your Unique Bouquet:</Text>
-            <Text style={styles.responseText}>{content}</Text>
+            <Text style={styles.responseText}>{message.content}</Text>
         </View>
     );
 
     return (
         <SafeAreaView style={styles.container}>
+            <Text style={styles.title}>Custom Bouquet Generator</Text>
+
             <TextInput
                 style={styles.input}
                 onChangeText={text => setKeywords(text)}
                 value={keywords}
+                placeholder="Enter keywords (e.g., roses, birthday)"
             />
 
             <Button
                 onPress={getResponse}
                 title={loading ? 'Thinking...' : 'Create Bouquet'}
                 color="blue"
-                accessibilityLabel="Send"
+                disabled={loading}
+                accessibilityLabel="Create Bouquet"
             />
+
+            {loading && <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 20 }} />}
+
+            {error && <Text style={styles.errorText}>{error}</Text>}
 
             <FlatList
-                data={data.choices}
-                keyExtractor={({ index }) => index}
-                renderItem={({ item }) => (
-                    <ChatResponse {...item.message} />
-                )}
+                data={data}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => <ChatResponse message={item.message} />}
+                style={{ marginTop: 20 }}
             />
-
         </SafeAreaView>
     );
 };
@@ -89,7 +90,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 20,
+        backgroundColor: '#f8f8f8',
     },
     title: {
         fontSize: 24,
@@ -99,21 +102,31 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        width: 200,
-        margin: 12,
+        width: '100%',
+        maxWidth: 400,
+        marginVertical: 10,
         borderWidth: 1,
+        borderRadius: 5,
         padding: 10,
     },
     responseContainer: {
         backgroundColor: 'lightblue',
-        margin: 10,
+        marginVertical: 10,
         padding: 20,
         alignItems: 'center',
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#ddd',
     },
     responseText: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 10,
+    },
+    errorText: {
+        color: 'red',
+        marginTop: 10,
+        fontSize: 16,
     },
 });
 

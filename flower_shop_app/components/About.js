@@ -10,7 +10,7 @@ const About = () => {
         <Text style={styles.placeholderText}>First the home page will show information about the shop and as you scol down it will reveal bottons that take users to different pages.</Text>
       </View>
     </View>
-  );
+  ); 
 };
 
 const styles = StyleSheet.create({
