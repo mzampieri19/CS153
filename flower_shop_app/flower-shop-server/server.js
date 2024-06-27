@@ -1,9 +1,14 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 3000;
 
 let orders = []; // Array to store orders
 
+// Use CORS middleware
+app.use(cors());
+
+// Parse JSON request bodies
 app.use(express.json());
 
 // Route to fetch all orders

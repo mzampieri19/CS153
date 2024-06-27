@@ -21,15 +21,14 @@ const Survey = () => {
   const [wrappingEnabled, setWrappingEnabled] = useState(false);
   const [selectedWrapping, setSelectedWrapping] = useState([]);
 
-  const server = 'http://localhost:3000';
-  const group = 'flower_shop_app'; 
-
+  const server = 'https://d2e2-108-20-29-47.ngrok-free.app/orders';
   const handleSubmit = async () => {
     //Connects and logs username and date accessed to server 
     console.log('Logging data to server');
     
     const surveyData = {
       username, 
+      occasion,
       date : new Date(),
       name,
       email,
@@ -42,7 +41,7 @@ const Survey = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:3000/orders', surveyData);
+      const response = await axios.post(server, surveyData);
       console.log('Order submitted successfully:', response.data);
       setSubmitted(true);
       Alert.alert('Order Submitted', 'Thank you for submitting your order!');
