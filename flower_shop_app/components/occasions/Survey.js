@@ -22,7 +22,7 @@ const Survey = () => {
   const [wrappingEnabled, setWrappingEnabled] = useState(false);
   const [selectedWrapping, setSelectedWrapping] = useState([]);
   const { currentValue, setCurrentValue } = useValue();
-  const server = 'https://8418-108-20-29-47.ngrok-free.app/orders';
+  const server = 'https://d7c7-108-20-29-47.ngrok-free.app/orders';
 
   const handleSubmit = async () => {
     console.log('Logging data to server');

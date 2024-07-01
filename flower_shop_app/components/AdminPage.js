@@ -9,7 +9,7 @@ const AdminPage = () => {
   const [loading, setLoading] = useState(true);
   const [visibleOrders, setVisibleOrders] = useState(5);
   
-  const server = 'https://8418-108-20-29-47.ngrok-free.app'
+  const server = 'https://d7c7-108-20-29-47.ngrok-free.app'
 
   useEffect(() => {
     const fetchOrders = async () => {
