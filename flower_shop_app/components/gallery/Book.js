@@ -49,11 +49,12 @@ const Book = () => {
           showsHorizontalScrollIndicator={false}
         >
           <CoverPage />
-
           <BookPage pages={pages} index={0} zoomLevel={zoomLevels[0]} />
           <BookPage pages={pages} index={2} zoomLevel={zoomLevels[0]} />
           <BookPage pages={pages} index={4} zoomLevel={zoomLevels[0]} />
-
+          <BookPage pages={pages} index={6} zoomLevel={zoomLevels[0]} />
+          <BookPage pages={pages} index={8} zoomLevel={zoomLevels[0]} />
+          <BookPage pages={pages} index={10} zoomLevel={zoomLevels[0]} />
           <EndPage />
 
         </ScrollView>

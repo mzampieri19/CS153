@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: 'black',
-    backgroundColor: 'brown',
+    backgroundColor: 'orange',
   },
   coverText: {
     fontSize: 24,
