@@ -14,6 +14,8 @@
 
 - Flower_shop_app: File for the flower_shop_app that is the main project for the class. 
 
+The flower shop app is an app I created for an online flower shop that includes many features, including: a log in system (no user authentication currently), a book style gallery, a server backed survey to send and fetch responses, fully styleized user interface, and an admin page to pull responses from server, as well as a database for persistance. This app was my first project in mobile app development and it taught me alot about mobile app development, styling, react native, server maintaince, push and pull requests, databases and app deployment. 
+
 - Flower-shop-server: Files for a local host server, this server is used to upload the orders into a JSON file and then they are pulled down in a composite form. The local server is then launched using ngrok. 
 
 ### Flower Shop App Edit History 
@@ -41,3 +43,6 @@
 
 8. 6-30-24
 - Made a few last style changes, changed the gitignore, and made three videos to showcase the app, one video explaining the code, explaining the storage, global varibales, server pulls and pushes and overall structure. Second video explains the ideas behind the app and the overall design and big picture plan for the future. Last video is the app running on the phone and showing the order push and pull systems. Final Videos desrcibed are hidden to github since I would not to upload otherwise. 
+
+9. 7-2-24
+- Last minute changes, this will probably be the last major and noteworthy update made. Added a comments feture to add comments on the gallery page, like the survey the comments are sent to the server, different room, and are then pulled down into the admin page. The admin page shows 5 most recent orders and comments with option to view 5 more of each. Overall Im satisfied with the app and was able to get all of the features I wanted and some I didnt know I would like. What is left is the pricing, carrers, story, and account pages, the first three I think I will leave empty as they would be mostly text anyways. The last, account, I might revisit in the future if I decide to maybe connect a firebase or database for user verification and account information, that is a work in progress for now. 

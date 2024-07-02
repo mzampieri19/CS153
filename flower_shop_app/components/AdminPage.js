@@ -1,51 +1,56 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, Button } from 'react-native';
 import axios from 'axios';
-import { useValue } from './background/ValueContext';
-
 
 const AdminPage = () => {
   const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [comments, setComments] = useState([]);
+  const [loadingOrders, setLoadingOrders] = useState(true);
+  const [loadingComments, setLoadingComments] = useState(true);
   const [visibleOrders, setVisibleOrders] = useState(5);
-  const [comments, setComments] = useState([]); 
   const [visibleComments, setVisibleComments] = useState(5);
-  
-  const server = 'https://flower-server-spu1.onrender.com'
+
+  const server = 'https://flower-server-spu1.onrender.com';
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(`${server}/room?id=orders`);
-        setOrders(response.data);
+        const data = response.data;
+        const ordersArray = data[""] ? [data[""]] : [];
+        console.log('Orders fetched:', ordersArray);
+        setOrders(ordersArray);
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching orders:', error);
       } finally {
-        setLoading(false);
+        setLoadingOrders(false);
       }
     };
+
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`${server}/comments`);
-        setComments(response.data);
+        const response = await axios.get(`${server}/room?id=comments`);
+        const data = response.data;
+        const commentsArray = data[""] ? [data[""]] : [];
+        console.log('Comments fetched:', commentsArray);
+        setComments(commentsArray);
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching comments:', error);
       } finally {
-        setLoading(false);
+        setLoadingComments(false);
       }
-    }
+    };
 
     fetchOrders();
     fetchComments();
   }, []);
 
-  if (loading) {
+  if (loadingOrders || loadingComments) {
     return <ActivityIndicator size="large" color="#0000ff" />;
   }
 
-  const keyExtractor = (item, index) => {
-    return item.id ? item.id.toString() : `order-${index}`;
-  };
+  const keyExtractorOrders = (item, index) => item.id ? item.id.toString() : `order-${index}`;
+  const keyExtractorComments = (item, index) => item.id ? item.id.toString() : `comment-${index}`;
 
   const renderOrder = ({ item }) => (
     <View style={styles.orderContainer} key={item.id ? item.id.toString() : `order-${item.username}-${item.date}`}>
@@ -65,39 +70,42 @@ const AdminPage = () => {
   );
 
   const renderComment = ({ item }) => (
-    <View style={styles.orderContainer} key={item.id ? item.id.toString() : `order-${item.username}-${item.date}`}>
+    <View style={styles.orderContainer} key={item.id ? item.id.toString() : `comment-${item.name}-${item.date}`}>
       <Text style={styles.orderText}><Text style={styles.label}>Name:</Text> {item.name}</Text>
       <Text style={styles.orderText}><Text style={styles.label}>Comment:</Text> {item.comment}</Text>
     </View>
   );
 
-  const loadMoreOrders = () => {
-    setVisibleOrders(prevVisibleOrders => prevVisibleOrders + 5);
-  };
-
-  const loadMoreComments = () => {
-    setVisibleComments(prevVisibleComments => prevVisibleComments + 5);
-  }
+  const loadMoreOrders = () => setVisibleOrders(prev => prev + 5);
+  const loadMoreComments = () => setVisibleComments(prev => prev + 5);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>All Orders</Text>
-      <FlatList
-        data={orders.slice(0, visibleOrders)}
-        keyExtractor={keyExtractor}
-        renderOrder={renderOrder}
-      />
+      {orders.length > 0 ? (
+        <FlatList
+          data={orders.slice(0, visibleOrders)}
+          keyExtractor={keyExtractorOrders}
+          renderItem={renderOrder}
+        />
+      ) : (
+        <Text>No orders available</Text>
+      )}
       {visibleOrders < orders.length && (
         <Button title="Load More" onPress={loadMoreOrders} />
       )}
 
       <Text style={styles.title}>All Comments</Text>
-      <FlatList
-        data={orders.slice(0, visibleOrders)}
-        keyExtractor={keyExtractor}
-        renderComment={renderComment}
-      />
-      {visibleOrders < orders.length && (
+      {comments.length > 0 ? (
+        <FlatList
+          data={comments.slice(0, visibleComments)}
+          keyExtractor={keyExtractorComments}
+          renderItem={renderComment}
+        />
+      ) : (
+        <Text>No comments available</Text>
+      )}
+      {visibleComments < comments.length && (
         <Button title="Load More" onPress={loadMoreComments} />
       )}
     </View>
