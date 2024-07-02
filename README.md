@@ -4,9 +4,9 @@
 
 ### The Exams and Videos folder is hidden from github view in order to not allow any cheating or copying of code.
 
-### This repository includes the following projects:
+-------------------------------------------------------------------------------------
 
-----------------------------------------------------------------
+### This repository includes the following projects:
 
 - Exam1: Files for takehome exam 1, recreating the area of triangle app, given the image of an app I recreated it to be as similar as possible, both styles and functionality.  
 
@@ -14,11 +14,11 @@
 
 - Flower_shop_app: File for the flower_shop_app that is the main project for the class. 
 
+- Flower-shop-server: Files for a local host server, this server is used to upload the orders into a JSON file and then they are pulled down in a composite form. The local server is then launched using ngrok. 
+
 ### Summary of app 
 
 The flower shop app is an app I created for an online flower shop that includes many features, including: a log in system (no user authentication currently), a book style gallery, a server backed survey to send and fetch responses, fully styleized user interface, and an admin page to pull responses from server, as well as a database for persistance. This app was my first project in mobile app development and it taught me alot about mobile app development, styling, react native, server maintaince, push and pull requests, databases and app deployment. 
-
-- Flower-shop-server: Files for a local host server, this server is used to upload the orders into a JSON file and then they are pulled down in a composite form. The local server is then launched using ngrok. 
 
 ### App edit history 
 
