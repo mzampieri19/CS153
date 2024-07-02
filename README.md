@@ -2,7 +2,7 @@
 
 ## This repository holds all files for programming assignments and takehome exams I created for COSI 153, Mobile App Development, at Brandeis Univeristy in Summer 2024.
 
-### The Exams and Videos folder, is hidden from github view in order to not allow any cheating or copying of code.
+### The Exams and Videos folder is hidden from github view in order to not allow any cheating or copying of code.
 
 ### This repository includes the following projects:
 
@@ -14,11 +14,13 @@
 
 - Flower_shop_app: File for the flower_shop_app that is the main project for the class. 
 
+### Summary of app 
+
 The flower shop app is an app I created for an online flower shop that includes many features, including: a log in system (no user authentication currently), a book style gallery, a server backed survey to send and fetch responses, fully styleized user interface, and an admin page to pull responses from server, as well as a database for persistance. This app was my first project in mobile app development and it taught me alot about mobile app development, styling, react native, server maintaince, push and pull requests, databases and app deployment. 
 
 - Flower-shop-server: Files for a local host server, this server is used to upload the orders into a JSON file and then they are pulled down in a composite form. The local server is then launched using ngrok. 
 
-### Flower Shop App Edit History 
+### App edit history 
 
 1. 6-11-24
 - As of right now, it features a home page with navigation to other pages, and an occation page that lets peeople choose the given occasion and propmts them to fill out a survery form. Will continue to work on this project throughout the course. 
