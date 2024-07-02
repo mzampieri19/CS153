@@ -8,13 +8,15 @@ const AdminPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [visibleOrders, setVisibleOrders] = useState(5);
+  const [comments, setComments] = useState([]); 
+  const [visibleComments, setVisibleComments] = useState(5);
   
-  const server = 'https://d7c7-108-20-29-47.ngrok-free.app'
+  const server = 'https://flower-server-spu1.onrender.com'
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(`${server}/orders`);
+        const response = await axios.get(`${server}/room?id=orders`);
         setOrders(response.data);
       } catch (error) {
         console.error(error);
@@ -22,8 +24,19 @@ const AdminPage = () => {
         setLoading(false);
       }
     };
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(`${server}/comments`);
+        setComments(response.data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
 
     fetchOrders();
+    fetchComments();
   }, []);
 
   if (loading) {
@@ -34,7 +47,7 @@ const AdminPage = () => {
     return item.id ? item.id.toString() : `order-${index}`;
   };
 
-  const renderItem = ({ item }) => (
+  const renderOrder = ({ item }) => (
     <View style={styles.orderContainer} key={item.id ? item.id.toString() : `order-${item.username}-${item.date}`}>
       <Text style={styles.orderText}><Text style={styles.label}>Username:</Text> {item.username}</Text>
       <Text style={styles.orderText}><Text style={styles.label}>Date:</Text> {item.date}</Text>
@@ -51,9 +64,20 @@ const AdminPage = () => {
     </View>
   );
 
+  const renderComment = ({ item }) => (
+    <View style={styles.orderContainer} key={item.id ? item.id.toString() : `order-${item.username}-${item.date}`}>
+      <Text style={styles.orderText}><Text style={styles.label}>Name:</Text> {item.name}</Text>
+      <Text style={styles.orderText}><Text style={styles.label}>Comment:</Text> {item.comment}</Text>
+    </View>
+  );
+
   const loadMoreOrders = () => {
     setVisibleOrders(prevVisibleOrders => prevVisibleOrders + 5);
   };
+
+  const loadMoreComments = () => {
+    setVisibleComments(prevVisibleComments => prevVisibleComments + 5);
+  }
 
   return (
     <View style={styles.container}>
@@ -61,10 +85,20 @@ const AdminPage = () => {
       <FlatList
         data={orders.slice(0, visibleOrders)}
         keyExtractor={keyExtractor}
-        renderItem={renderItem}
+        renderOrder={renderOrder}
       />
       {visibleOrders < orders.length && (
         <Button title="Load More" onPress={loadMoreOrders} />
+      )}
+
+      <Text style={styles.title}>All Comments</Text>
+      <FlatList
+        data={orders.slice(0, visibleOrders)}
+        keyExtractor={keyExtractor}
+        renderComment={renderComment}
+      />
+      {visibleOrders < orders.length && (
+        <Button title="Load More" onPress={loadMoreComments} />
       )}
     </View>
   );

@@ -22,7 +22,7 @@ const Survey = () => {
   const [wrappingEnabled, setWrappingEnabled] = useState(false);
   const [selectedWrapping, setSelectedWrapping] = useState([]);
   const { currentValue, setCurrentValue } = useValue();
-  const server = 'https://d7c7-108-20-29-47.ngrok-free.app/orders';
+  const server = 'https://flower-server-spu1.onrender.com';
 
   const handleSubmit = async () => {
     console.log('Logging data to server');
@@ -43,7 +43,12 @@ const Survey = () => {
     };
 
     try {
-      const response = await axios.post(server, surveyData);
+      const response =
+        await axios(
+            {method: 'post',
+            url: server+'/room',
+            data: {id:'orders', uid:username, data: surveyData},
+            });
       console.log('Order submitted successfully:', response.data);
       setSubmitted(true);
       Alert.alert('Order Submitted', 'Thank you for submitting your order!');
