@@ -10,7 +10,7 @@ const AdminPage = () => {
   const [visibleOrders, setVisibleOrders] = useState(5);
   const [visibleComments, setVisibleComments] = useState(5);
 
-  const server = 'https://flower-server-spu1.onrender.com';
+  const server = 'https://flower-shop-db.onrender.com';
 
   useEffect(() => {
     const fetchOrders = async () => {

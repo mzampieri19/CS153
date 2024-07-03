@@ -13,7 +13,7 @@ const sendComment = async (text) => {
   setComment(text);
   await axios({
     method:'post', 
-    url: 'https://flower-server-spu1.onrender.com/comments', 
+    url: 'https://flower-shop-db.onrender.com/comments', 
     data: {name: 'anon', comment: text}
   });
   Alert.alert('Comment Sent', 'Thank you, a memeber of our team will review your comment!');

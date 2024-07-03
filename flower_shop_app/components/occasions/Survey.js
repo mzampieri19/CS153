@@ -22,7 +22,7 @@ const Survey = () => {
   const [wrappingEnabled, setWrappingEnabled] = useState(false);
   const [selectedWrapping, setSelectedWrapping] = useState([]);
   const { currentValue, setCurrentValue } = useValue();
-  const server = 'https://flower-server-spu1.onrender.com';
+  const server = 'https://flower-shop-db.onrender.com';
 
   const handleSubmit = async () => {
     console.log('Logging data to server');
@@ -47,7 +47,7 @@ const Survey = () => {
         await axios(
             {method: 'post',
             url: server+'/room',
-            data: {id:'orders', uid:username, data: surveyData},
+            data: {id:'orders', uid:username, data: JSON.stringify(surveyData)},
             });
       console.log('Order submitted successfully:', response.data);
       setSubmitted(true);
